@@ -4,6 +4,7 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>calixx_22 — Portfolio</title>
   <meta name="description" content="calixx_22 — Community Member & Emerging Leader in the Roblox realism space. Based in the Philippines.">
@@ -212,6 +213,75 @@
       left: -9999px; top: 0;
       pointer-events: none; opacity: 0; overflow: hidden;
     }
+    #sound-pill {
+      position: fixed; bottom: 1.25rem; left: 50%; z-index: 9997;
+      transform: translateX(-50%) translateY(20px);
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.3rem; border-radius: 50px;
+      border: 1px solid var(--border);
+      background: var(--bg-2); color: var(--text);
+      font-family: var(--sans); font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; box-shadow: var(--shadow-md);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+      white-space: nowrap; max-width: 92vw;
+    }
+    #sound-pill.show { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    #sound-pill:hover { transform: translateX(-50%) translateY(-3px); }
+    #sound-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); animation: pulse 2s ease-in-out infinite; }
+
+    /* ─── WELCOME OVERLAY ─── */
+    #welcome-overlay {
+      position: fixed; inset: 0; z-index: 10000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      background: rgba(34, 26, 30, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 1;
+      transition: opacity 0.5s var(--ease), visibility 0.5s;
+    }
+    #welcome-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .welcome-card {
+      width: 100%; max-width: 420px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      box-shadow: var(--shadow-xl);
+      padding: 2.75rem 2.25rem 2.25rem;
+      text-align: center;
+      transform: translateY(0) scale(1);
+      transition: transform 0.5s var(--ease);
+    }
+    #welcome-overlay.hidden .welcome-card { transform: translateY(24px) scale(0.96); }
+    .welcome-monogram {
+      width: 72px; height: 72px; margin: 0 auto 1.25rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--display); font-size: 2rem; font-weight: 900;
+      box-shadow: var(--shadow-md);
+    }
+    .welcome-eyebrow {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+    }
+    .welcome-card h2 {
+      font-family: var(--display);
+      font-size: 1.9rem; font-weight: 800;
+      color: var(--accent); margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+    [data-theme="dark"] .welcome-card h2 { color: var(--text); }
+    .welcome-card p {
+      font-size: 0.92rem; color: var(--text-2);
+      line-height: 1.7; margin-bottom: 1.75rem;
+    }
+    #exploreBtn { width: 100%; justify-content: center; font-size: 0.95rem; padding: 1rem 1.85rem; }
+    .welcome-note { margin-top: 1rem; font-size: 0.72rem; color: var(--text-3); }
+    body.welcome-locked { overflow: hidden; }
 
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
@@ -1152,7 +1222,18 @@
     }
   </style>
 </head>
-<body>
+<body class="welcome-locked">
+  <!-- ─── WELCOME ─── -->
+  <div id="welcome-overlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-card">
+      <div class="welcome-monogram">C</div>
+      <div class="welcome-eyebrow">Welcome to my portfolio</div>
+      <h2 id="welcomeTitle">Hi, I'm Calix ✦</h2>
+      <p>Community Member &amp; Emerging Leader in the Roblox realism space. Click Explore to enter — music starts with sound.</p>
+      <button id="exploreBtn" class="btn btn-primary">Explore →</button>
+      <div class="welcome-note">🎵 Music: Ikaw at Ako</div>
+    </div>
+  </div>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- ─── PROGRESS BAR ─── -->
@@ -1542,6 +1623,7 @@
 
   <!-- ─── BG MUSIC (YouTube autoplay: l5ta60yfryc) ─── -->
   <div id="yt-music-wrap" aria-hidden="true"><div id="yt-player"></div></div>
+  <button id="sound-pill" aria-label="Tap to enable sound"><span class="dot"></span><span>🎵 Tap for music — Ikaw at Ako</span></button>
 
   <script>
   /* ═══════════════════════════════════════════
@@ -2102,91 +2184,199 @@
   }
 
   /* ═══════════════════════════════════════════
-     BACKGROUND MUSIC — YouTube autoplay (l5ta60yfryc)
-     Browsers block audible autoplay, so we start muted
-     then unmute on first tap/keypress.
+     BACKGROUND MUSIC — l5ta60yfryc (Ikaw at Ako)
+     Explore click = user gesture, so audible play is allowed.
   ═══════════════════════════════════════════ */
   (function() {
     var VIDEO_ID = 'l5ta60yfryc';
     var STORAGE_KEY = 'calix-music';
     var btn = document.getElementById('musicToggle');
+    var pill = document.getElementById('sound-pill');
     var wantPlay = true;
     try { var s = localStorage.getItem(STORAGE_KEY); if (s === 'off') wantPlay = false; } catch (e) {}
-    var player = null, ready = false, unmuted = false;
+    var player = null, ready = false, soundOn = false, pendingStart = false, retryTimer = null;
 
     function updateBtn() {
       if (!btn) return;
-      btn.textContent = (!wantPlay) ? '🔇' : (unmuted ? '🎵' : '🔈');
+      btn.textContent = (!wantPlay) ? '🔇' : (soundOn ? '🎵' : '🔈');
       btn.classList.toggle('is-off', !wantPlay);
-      btn.setAttribute('aria-label', wantPlay ? 'Mute background music' : 'Play background music');
-      btn.title = wantPlay ? 'Mute music' : 'Play music';
     }
-    updateBtn();
+    function updatePill() {
+      if (!pill) return;
+      pill.classList.toggle('show', !!(ready && wantPlay && !soundOn));
+    }
+    updateBtn(); updatePill();
 
     function toast(msg) { try { if (typeof showToast === 'function') showToast(msg); } catch (e) {} }
 
-    function tryUnmute() {
-      if (!player || !ready || !wantPlay || unmuted) return;
+    function confirmSound() {
       try {
-        player.unMute();
-        player.setVolume(80);
-        player.playVideo();
-        unmuted = true;
-        updateBtn();
+        if (player && player.getPlayerState && player.getPlayerState() === 1 && player.isMuted && !player.isMuted()) {
+          soundOn = true; pendingStart = false;
+          if (retryTimer) { clearInterval(retryTimer); retryTimer = null; }
+          updateBtn(); updatePill();
+          return true;
+        }
       } catch (e) {}
+      return false;
     }
 
-    ['pointerdown', 'keydown', 'touchstart', 'click'].forEach(function(ev) {
-      window.addEventListener(ev, tryUnmute, { passive: true });
+    function doAudiblePlay() {
+      if (!player || !ready) return false;
+      try {
+        player.unMute();
+        player.setVolume(100);
+        player.playVideo();
+        return true;
+      } catch (e) { return false; }
+    }
+
+    function startRetryLoop() {
+      if (retryTimer) return;
+      var tries = 0;
+      retryTimer = setInterval(function() {
+        tries++;
+        if (!pendingStart || soundOn) { clearInterval(retryTimer); retryTimer = null; return; }
+        if (doAudiblePlay()) {
+          if (confirmSound()) { toast('Music on 🎵 — Ikaw at Ako'); }
+          else if (tries > 20) { clearInterval(retryTimer); retryTimer = null; toast('Tap 🎵 para tumunog'); updatePill(); }
+        }
+        if (tries > 40) { clearInterval(retryTimer); retryTimer = null; }
+      }, 500);
+    }
+
+    // THE gesture entry point — call synchronously inside Explore click.
+    function startAudible() {
+      wantPlay = true;
+      try { localStorage.setItem(STORAGE_KEY, 'on'); } catch (e) {}
+      soundOn = false; pendingStart = true;
+      updateBtn(); updatePill();
+      if (doAudiblePlay()) {
+        setTimeout(function() {
+          if (confirmSound()) toast('Music on 🎵 — Ikaw at Ako');
+          else startRetryLoop();
+        }, 600);
+      } else {
+        startRetryLoop();
+      }
+    }
+
+    function unlockSound() {
+      if (!player || !ready || !wantPlay || soundOn) return;
+      doAudiblePlay();
+      setTimeout(confirmSound, 500);
+    }
+
+    ['pointerdown', 'touchstart', 'keydown'].forEach(function(ev) {
+      window.addEventListener(ev, unlockSound, { passive: true });
     });
+    if (pill) pill.addEventListener('click', function(e) { e.stopPropagation(); pendingStart = true; unlockSound(); startRetryLoop(); });
 
     if (btn) btn.addEventListener('click', function(e) {
       e.stopPropagation();
       wantPlay = !wantPlay;
       try { localStorage.setItem(STORAGE_KEY, wantPlay ? 'on' : 'off'); } catch (err) {}
-      if (!player || !ready) { updateBtn(); return; }
+      if (!player || !ready) { updateBtn(); updatePill(); return; }
       try {
-        if (wantPlay) { player.playVideo(); tryUnmute(); toast('Music on 🎵'); }
-        else { player.pauseVideo(); updateBtn(); toast('Music off 🔇'); }
+        if (wantPlay) { startAudible(); }
+        else { pendingStart = false; soundOn = false; player.pauseVideo(); updateBtn(); updatePill(); toast('Music off 🔇'); }
       } catch (err) {}
     });
+
+    function createPlayer() {
+      if (player) return;
+      try {
+        var opts = {
+          width: '4', height: '4',
+          videoId: VIDEO_ID,
+          host: 'https://www.youtube-nocookie.com',
+          playerVars: { autoplay: 0, mute: 0, loop: 1, playlist: VIDEO_ID, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0 },
+          events: {
+            onReady: function(ev) {
+              ready = true;
+              updateBtn(); updatePill();
+              if (pendingStart && wantPlay) doAudiblePlay();
+              else if (wantPlay && !window.__calixEntered) { try { ev.target.cueVideoById(VIDEO_ID); } catch (e) {} }
+              if (pendingStart) startRetryLoop();
+            },
+            onStateChange: function(ev) {
+              if (ev.data === 1 && wantPlay) { confirmSound(); updatePill(); }
+              if (ev.data === 0 && wantPlay) { try { ev.target.playVideo(); } catch (e) {} }
+            },
+            onError: function(ev) {
+              var code = ev && ev.data ? ev.data : '?';
+              try { console.log('[calix-music] YT error', code); } catch (e) {}
+              if (code === 153 || code === 101 || code === 150) {
+                var local = false;
+                try { local = (location.protocol === 'file:'); } catch (e) {}
+                if (local) toast('Error 153: i-host mo muna (file:// blocked ni YouTube)');
+                else toast('Music error 153 — tap 🎵 to retry');
+                // Fallback: pill opens YouTube directly so music still plays.
+                if (pill) {
+                  pill.classList.add('show');
+                  pill.innerHTML = '<span class="dot"></span><span>🎵 Play on YouTube — Ikaw at Ako</span>';
+                  pill.onclick = function() { try { window.open('https://www.youtube.com/watch?v=' + VIDEO_ID + '&list=RD' + VIDEO_ID + '&start_radio=1', '_blank'); } catch (e) {} };
+                }
+              } else {
+                toast('Music error (' + code + ') — tap 🎵 to retry');
+              }
+              updatePill();
+            }
+          }
+        };
+        try {
+          if (location.protocol.indexOf('http') === 0 && location.origin && location.origin !== 'null') {
+            opts.playerVars.origin = location.origin;
+          }
+        } catch (e) {}
+        player = new YT.Player('yt-player', opts);
+      } catch (e) { toast('Music blocked — tap 🎵 to retry'); }
+    }
 
     window.onYouTubeIframeAPIReady = (function(prev) {
       return function() {
         if (typeof prev === 'function') { try { prev(); } catch (e) {} }
-        onYTReady();
+        createPlayer();
       };
     })(window.onYouTubeIframeAPIReady);
+    // If API already cached/loaded:
+    if (window.YT && window.YT.Player) { try { createPlayer(); } catch (e) {} }
 
-    function onYTReady() {
-      try {
-        player = new YT.Player('yt-player', {
-          width: '4', height: '4',
-          videoId: VIDEO_ID,
-          playerVars: { autoplay: 1, mute: 1, loop: 1, playlist: VIDEO_ID, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0 },
-          events: {
-            onReady: function(ev) {
-              ready = true;
-              try { ev.target.mute(); ev.target.setVolume(0); ev.target.playVideo(); } catch (e) {}
-              updateBtn();
-              setTimeout(tryUnmute, 800);
-              setTimeout(tryUnmute, 2500);
-              if (wantPlay) setTimeout(function() { if (!unmuted) toast('Tap anywhere for sound 🎵'); }, 2200);
-              if (!wantPlay) { try { ev.target.pauseVideo(); } catch (e) {} updateBtn(); }
-            },
-            onStateChange: function(ev) {
-              if (ev.data === 1 && wantPlay && !unmuted) tryUnmute();
-              if (ev.data === 0 && wantPlay) { try { ev.target.playVideo(); } catch (e) {} }
-            }
-          }
-        });
-      } catch (e) {}
+    window.__unlockCalixMusic = unlockSound;
+    window.__calixMusicStart = startAudible;
+
+    if (!window.__ytApiTag) {
+      window.__ytApiTag = true;
+      var tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      tag.async = true;
+      tag.onerror = function() { toast('No internet — music disabled'); };
+      document.head.appendChild(tag);
     }
+  })();
 
-    var tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    tag.async = true;
-    document.head.appendChild(tag);
+  /* ═══════════════════════════════════════════
+     WELCOME OVERLAY — Explore starts music with sound
+  ═══════════════════════════════════════════ */
+  (function() {
+    var overlay = document.getElementById('welcome-overlay');
+    var explore = document.getElementById('exploreBtn');
+    if (!overlay || !explore) return;
+    window.__calixEntered = false;
+    document.body.classList.add('welcome-locked');
+    function enter() {
+      if (window.__calixEntered) return;
+      window.__calixEntered = true;
+      overlay.classList.add('hidden');
+      document.body.classList.remove('welcome-locked');
+      try {
+        if (typeof window.__calixMusicStart === 'function') window.__calixMusicStart();
+      } catch (e) {}
+      setTimeout(function() { if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay); }, 600);
+    }
+    explore.addEventListener('click', enter);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) enter(); });
+    document.addEventListener('keydown', function(e) { if ((e.key === 'Enter' || e.key === ' ') && !window.__calixEntered) enter(); });
   })();
   </script>
 </body>
