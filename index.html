@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -205,6 +206,12 @@
       transition: all 0.3s var(--ease);
     }
     .theme-toggle:hover { border-color: var(--gold); color: var(--gold); transform: rotate(20deg) scale(1.1); }
+    .music-toggle.is-off { opacity: 0.55; }
+    #yt-music-wrap {
+      position: fixed; width: 4px; height: 4px;
+      left: -9999px; top: 0;
+      pointer-events: none; opacity: 0; overflow: hidden;
+    }
 
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
@@ -1192,6 +1199,7 @@
       <a href="#contact"    class="nav-link">Contact</a>
     </nav>
     <div class="header-actions">
+      <button class="theme-toggle music-toggle" id="musicToggle" aria-label="Mute background music" title="Mute music">🔈</button>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <span></span><span></span><span></span>
@@ -1531,6 +1539,9 @@
       <p class="footer-copy">© 2026 calixx_22. All rights reserved. · CALIX PROPERTY</p>
     </div>
   </footer>
+
+  <!-- ─── BG MUSIC (YouTube autoplay: l5ta60yfryc) ─── -->
+  <div id="yt-music-wrap" aria-hidden="true"><div id="yt-player"></div></div>
 
   <script>
   /* ═══════════════════════════════════════════
@@ -2089,6 +2100,94 @@
       btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
   }
+
+  /* ═══════════════════════════════════════════
+     BACKGROUND MUSIC — YouTube autoplay (l5ta60yfryc)
+     Browsers block audible autoplay, so we start muted
+     then unmute on first tap/keypress.
+  ═══════════════════════════════════════════ */
+  (function() {
+    var VIDEO_ID = 'l5ta60yfryc';
+    var STORAGE_KEY = 'calix-music';
+    var btn = document.getElementById('musicToggle');
+    var wantPlay = true;
+    try { var s = localStorage.getItem(STORAGE_KEY); if (s === 'off') wantPlay = false; } catch (e) {}
+    var player = null, ready = false, unmuted = false;
+
+    function updateBtn() {
+      if (!btn) return;
+      btn.textContent = (!wantPlay) ? '🔇' : (unmuted ? '🎵' : '🔈');
+      btn.classList.toggle('is-off', !wantPlay);
+      btn.setAttribute('aria-label', wantPlay ? 'Mute background music' : 'Play background music');
+      btn.title = wantPlay ? 'Mute music' : 'Play music';
+    }
+    updateBtn();
+
+    function toast(msg) { try { if (typeof showToast === 'function') showToast(msg); } catch (e) {} }
+
+    function tryUnmute() {
+      if (!player || !ready || !wantPlay || unmuted) return;
+      try {
+        player.unMute();
+        player.setVolume(80);
+        player.playVideo();
+        unmuted = true;
+        updateBtn();
+      } catch (e) {}
+    }
+
+    ['pointerdown', 'keydown', 'touchstart', 'click'].forEach(function(ev) {
+      window.addEventListener(ev, tryUnmute, { passive: true });
+    });
+
+    if (btn) btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      wantPlay = !wantPlay;
+      try { localStorage.setItem(STORAGE_KEY, wantPlay ? 'on' : 'off'); } catch (err) {}
+      if (!player || !ready) { updateBtn(); return; }
+      try {
+        if (wantPlay) { player.playVideo(); tryUnmute(); toast('Music on 🎵'); }
+        else { player.pauseVideo(); updateBtn(); toast('Music off 🔇'); }
+      } catch (err) {}
+    });
+
+    window.onYouTubeIframeAPIReady = (function(prev) {
+      return function() {
+        if (typeof prev === 'function') { try { prev(); } catch (e) {} }
+        onYTReady();
+      };
+    })(window.onYouTubeIframeAPIReady);
+
+    function onYTReady() {
+      try {
+        player = new YT.Player('yt-player', {
+          width: '4', height: '4',
+          videoId: VIDEO_ID,
+          playerVars: { autoplay: 1, mute: 1, loop: 1, playlist: VIDEO_ID, controls: 0, disablekb: 1, fs: 0, iv_load_policy: 3, modestbranding: 1, playsinline: 1, rel: 0 },
+          events: {
+            onReady: function(ev) {
+              ready = true;
+              try { ev.target.mute(); ev.target.setVolume(0); ev.target.playVideo(); } catch (e) {}
+              updateBtn();
+              setTimeout(tryUnmute, 800);
+              setTimeout(tryUnmute, 2500);
+              if (wantPlay) setTimeout(function() { if (!unmuted) toast('Tap anywhere for sound 🎵'); }, 2200);
+              if (!wantPlay) { try { ev.target.pauseVideo(); } catch (e) {} updateBtn(); }
+            },
+            onStateChange: function(ev) {
+              if (ev.data === 1 && wantPlay && !unmuted) tryUnmute();
+              if (ev.data === 0 && wantPlay) { try { ev.target.playVideo(); } catch (e) {} }
+            }
+          }
+        });
+      } catch (e) {}
+    }
+
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    tag.async = true;
+    document.head.appendChild(tag);
+  })();
   </script>
 </body>
 </html>
