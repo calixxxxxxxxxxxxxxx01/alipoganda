@@ -1,0 +1,485 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>calixx_22 — Portfolio</title>
+  <meta name="description" content="calixx_22 — Community Member · Administration & Technical Support in the Roblox realism space. Based in the Philippines.">
+  <meta name="author" content="calixx_22">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#9D5C63" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#2A1E22" media="(prefers-color-scheme: dark)">
+  <meta property="og:site_name" content="calixx_22 — Portfolio">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='50' fill='%239D5C63'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Georgia,serif' font-weight='700' fill='white'>C</text></svg>">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"calixx_22","jobTitle":"Community Member, Administration & Technical Support","address":{"@type":"PostalAddress","addressCountry":"PH"}}</script>
+  <!-- Open Graph / Discord / Social Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="calixx_22 — Portfolio">
+  <meta property="og:description" content="Community Member · Administration & Technical Support. Always willing to help, always ready to learn.">
+  <meta property="og:image" content="https://res.cloudinary.com/di3xaktpd/image/upload/v1777526099/Screenshot_2026-04-30_125735_nmknyi.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="calixx_22 — Portfolio">
+  <meta name="twitter:description" content="Community Member · Administration & Technical Support in the Roblox realism space.">
+  <meta name="twitter:image" content="https://res.cloudinary.com/di3xaktpd/image/upload/v1777526099/Screenshot_2026-04-30_125735_nmknyi.png">
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='50' fill='%239D5C63'/><text y='72' x='50' text-anchor='middle' font-size='52' font-family='Georgia,serif' font-weight='700' fill='white'>C</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://res.cloudinary.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="calix.css">
+</head>
+<body class="welcome-locked">
+  <!-- ─── WELCOME ─── -->
+  <div id="welcome-overlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-card">
+      <div class="welcome-monogram">C</div>
+      <div class="welcome-eyebrow">Welcome to my portfolio</div>
+      <h2 id="welcomeTitle">Hi, I'm Calix ✦</h2>
+      <p>Community Member &amp; Administration &amp; Technical Support in the Roblox realism space. Click Explore to enter — music starts with sound.</p>
+      <button id="exploreBtn" class="btn btn-primary">Explore →</button>
+      <div class="welcome-note">🎵 Music: Ikaw at Ako</div>
+    </div>
+  </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ─── PROGRESS BAR ─── -->
+  <div id="progress-bar" aria-hidden="true"></div>
+
+  <!-- ─── BACK TO TOP ─── -->
+  <button id="back-top" aria-label="Back to top">↑</button>
+
+  <!-- ─── TOAST ─── -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ─── LIGHTBOX ─── -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lb-topbar">
+      <span class="lb-counter" id="lbCounter">1 / 1</span>
+      <span class="lb-caption-top" id="lbCaption"></span>
+      <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    </div>
+    <div class="lb-stage" id="lbStage">
+      <div class="lb-spinner" id="lbSpinner"></div>
+      <img class="lb-img" id="lbImg" src="" alt="Gallery image" draggable="false">
+      <button class="lb-prev" id="lbPrev" aria-label="Previous">&#8592;</button>
+      <button class="lb-next" id="lbNext" aria-label="Next">&#8594;</button>
+    </div>
+    <div class="lb-bottombar">
+      <button class="lb-zoom-btn" id="lbZoomOut" title="Zoom out" aria-label="Zoom out">&#8722;</button>
+      <span class="lb-zoom-label" id="lbZoomLabel">100%</span>
+      <button class="lb-zoom-btn" id="lbZoomIn" title="Zoom in" aria-label="Zoom in">&#43;</button>
+      <button class="lb-zoom-btn" id="lbZoomReset" aria-label="Reset zoom" style="font-size:0.72rem;width:auto;border-radius:20px;padding:0 0.8rem;">⊙ Reset</button>
+      <div class="lb-dots" id="lbDots"></div>
+    </div>
+  </div>
+
+  <!-- ─── HEADER ─── -->
+  <header id="site-header">
+    <a href="#" class="logo">Calix</a>
+    <nav>
+      <a href="#about"      class="nav-link">About</a>
+      <a href="#skills"     class="nav-link">Skills</a>
+      <a href="#experience" class="nav-link">Service</a>
+      <a href="#awards"     class="nav-link">Awards</a>
+      <a href="#gallery"    class="nav-link">Gallery</a>
+      <a href="#current-service" class="nav-link">Current</a>
+      <a href="#traits"     class="nav-link">Traits</a>
+      <a href="#contact"    class="nav-link">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle music-toggle" id="musicToggle" aria-label="Mute background music" title="Mute music">🔈</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ─── MOBILE NAV ─── -->
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <a href="#about"      class="mobile-link">About</a>
+    <a href="#skills"     class="mobile-link">Skills</a>
+    <a href="#experience" class="mobile-link">Service</a>
+    <a href="#awards"     class="mobile-link">Awards</a>
+    <a href="#gallery"    class="mobile-link">Gallery</a>
+    <a href="#current-service" class="mobile-link">Current</a>
+    <a href="#traits"     class="mobile-link">Traits</a>
+    <a href="#contact"    class="mobile-link">Contact</a>
+  </div>
+
+  <main id="main">
+
+    <!-- ─── HERO ─── -->
+    <section class="hero" id="hero-section">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-bg-gradient"></div>
+      <div class="hero-grid-dots"></div>
+      <div class="hero-deco" aria-hidden="true">
+        <div class="hero-deco-ring"></div>
+        <div class="hero-deco-ring"></div>
+        <div class="hero-deco-ring"></div>
+        <div class="hero-deco-center">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="rbxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.95"/>
+                <stop offset="40%"  stop-color="#f3d9d4" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#c99a92" stop-opacity="0.75"/>
+              </linearGradient>
+              <linearGradient id="rbxGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#e8b8b0" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#9D5C63" stop-opacity="0.6"/>
+              </linearGradient>
+              <filter id="rbxInner" x="-10%" y="-10%" width="120%" height="120%">
+                <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="rgba(0,0,0,0.25)"/>
+              </filter>
+            </defs>
+            <circle cx="100" cy="100" r="70" fill="url(#rbxGrad)" filter="url(#rbxInner)"/>
+            <text x="100" y="122" text-anchor="middle" font-size="72" font-family="Georgia,serif" font-weight="700" fill="rgba(122,62,74,0.8)">C</text>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-content section-inner">
+        <div class="hero-badge">Open to Community Roles</div>
+        <div class="hero-eyebrow">Community Member · Administration & Technical Support</div>
+        <h1 class="hero-name" id="heroName"></h1>
+        <p class="hero-tagline">"Always willing to help, always ready to learn."</p>
+        <p class="hero-title">Community Member · Administration & Technical Support</p>
+        <div class="hero-divider"></div>
+        <p class="hero-description">Active community member with experience in administration, personnel management, leadership, documentation, and technical support across several Roblox military communities. Known for being hardworking, cooperative, and willing to take on tasks when needed.</p>
+        <div class="hero-buttons">
+          <a href="#experience" class="btn btn-primary">View Service Record ↓</a>
+          <a href="#contact"    class="btn btn-secondary">Get in Touch</a>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item"><span class="meta-label">Handle</span><span class="meta-value">calixx_22</span></div>
+          <div class="meta-item"><span class="meta-label">Rank</span><span class="meta-value">Technical Sergeant</span></div>
+          <div class="meta-item"><span class="meta-label">Location</span><span class="meta-value">Philippines 🇵🇭</span></div>
+          <div class="meta-item"><span class="meta-label">Focus</span><span class="meta-value">Admin & Support</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ABOUT ─── -->
+    <section id="about">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">01</span>
+          <h2 class="section-title">About</h2>
+          <p class="section-subtitle">Background and service history</p>
+        </div>
+        <div class="about-layout">
+          <div class="about-text reveal" style="transition-delay:0.1s">
+            <p>Hello, I'm <strong>calixx_22</strong>.</p>
+            <p>I'm an active community member who has been involved in different military realism communities since November 2025. Throughout my service, I have taken on various leadership, administrative, training, and support roles.</p>
+            <p>I enjoy being involved in community operations, helping personnel when needed, organizing information, and taking on responsibilities that contribute to the community. I'm also someone who is willing to learn, easy to work with, and always ready to assist when given a task.</p>
+            <p>Currently, I am serving within <strong>Philippine Army Roleplay (PAR)</strong>, where I am involved in 1st Infantry Division, the Army Artillery Regiment, and its IT Department.</p>
+            <div class="about-stats">
+              <div class="stat"><div class="stat-number" data-count="3">0</div><div class="stat-label">Communities Served</div></div>
+              <div class="stat"><div class="stat-number" data-count="13">0</div><div class="stat-label">Leadership & Support Roles</div></div>
+              <div class="stat"><div class="stat-number" data-count="15">0</div><div class="stat-label">Awards Earned</div></div>
+            </div>
+          </div>
+          <div class="about-card reveal" style="transition-delay:0.2s">
+            <div class="about-card-monogram">C</div>
+            <div class="about-card-label">Service Profile</div>
+            <div class="about-card-divider"></div>
+            <div class="about-card-row"><span class="about-card-key">Handle</span><span class="about-card-val">calixx_22</span></div>
+            <div class="about-card-row"><span class="about-card-key">Status</span><span class="about-card-val status-active">Active</span></div>
+            <div class="about-card-row"><span class="about-card-key">Service Since</span><span class="about-card-val">November 2025</span></div>
+            <div class="about-card-row"><span class="about-card-key">Communities</span><span class="about-card-val">3</span></div>
+            <div class="about-card-row"><span class="about-card-key">Current Rank</span><span class="about-card-val">Technical Sergeant</span></div>
+            <div class="about-card-row"><span class="about-card-key">Primary Focus</span><span class="about-card-val">Administration & Support</span></div>
+            <div class="about-card-divider"></div>
+            <div class="about-card-row"><span class="about-card-key">Location</span><span class="about-card-val">Philippines</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SKILLS ─── -->
+    <section id="skills">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">02</span>
+          <h2 class="section-title">Skills & Capabilities</h2>
+          <p class="section-subtitle">What I bring to the community</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card reveal-scale" style="--target:96%"><div class="skill-icon">📄</div><h4>Documentation</h4><p>Preparing, organizing, and maintaining documents, records, announcements, and other administrative materials.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>96%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:89%"><div class="skill-icon">🫡</div><h4>Leadership & Personnel Management</h4><p>Experience handling personnel, giving instructions, assisting subordinates, and taking responsibility when assigned to a leadership position.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>89%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:60%"><div class="skill-icon">🗄️</div><h4>Database Management</h4><p>Familiar with handling personnel information, records, and organized data through community systems.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>60%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:94%"><div class="skill-icon">🤝</div><h4>Teamwork & Cooperation</h4><p>Works well with others and is willing to assist staff and personnel whenever needed.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>94%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:72%"><div class="skill-icon">⚙️</div><h4>Technical Support</h4><p>Provides assistance with community websites, bots, databases, and other internal systems without being limited to purely technical development.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:91%"><div class="skill-icon">📋</div><h4>Administrative Support</h4><p>Experienced in assisting with personnel-related tasks, selections, deployments, quotas, records, and other administrative responsibilities.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>91%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:93%"><div class="skill-icon">🎯</div><h4>Task Management</h4><p>Willing to take on assigned responsibilities and complete tasks when needed, especially during events, operations, and administrative work.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>93%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+          <div class="skill-card reveal-scale" style="--target:90%"><div class="skill-icon">📚</div><h4>Learning & Adaptability</h4><p>Quick to learn new systems, procedures, and responsibilities when placed in unfamiliar roles.</p><div class="skill-bar-wrap"><div class="skill-bar-meta"><span>Proficiency</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill"></div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROJECTS ─── -->
+    
+
+<!-- ─── EXPERIENCE ─── -->
+    <section id="experience">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">03</span>
+          <h2 class="section-title">Service Record</h2>
+          <p class="section-subtitle">Leadership roles and community involvement</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal-left" style="transition-delay:0.05s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-role">Community Leader & Academy Staff</span>
+                <span class="timeline-period">Nov 2025 — Prior Service</span>
+              </div>
+              <p class="timeline-org">🇵🇭 Philippine Marine Corps (PMC)</p>
+              <div class="timeline-details"><ul>
+                <li>Valedictorian — Marine Scout Sharpshooter</li>
+                <li>Former Academy Director — Marine Scout Sharpshooter</li>
+                <li>Former Battalion Commanding Officer — 32nd “StealthEye” Purge Brigade</li>
+                <li>Former Senior Drill Instructor — Training and Education Command</li>
+                <li>Former Undersecretary of Foreign Affairs</li>
+              </ul></div>
+              <p class="timeline-note">My first major community experience. My time in PMC helped develop my foundation in leadership, discipline, training, and personnel management.</p>
+            </div>
+          </div>
+          <div class="timeline-item reveal-left" style="transition-delay:0.15s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-role">Leadership & Command Staff</span>
+                <span class="timeline-period">Jan 2026 — Prior Service</span>
+              </div>
+              <p class="timeline-org">🇵🇭 Philippine Military Combat Roleplay (PMCR)</p>
+              <div class="timeline-details"><ul>
+                <li>Former Senior Drill Instructor — Marine Education and Training Command</li>
+                <li>Former Deputy Academy Director — Philippine Force Reconnaissance Group</li>
+                <li>Former Deputy Commanding General — Philippine Force Reconnaissance Group</li>
+                <li>Former Deputy Secretary of National Defense — PMCR</li>
+                <li>Former Co-Founder — PMCR</li>
+              </ul></div>
+              <p class="timeline-note">My experience in PMCR further developed my ability to work with personnel, manage responsibilities, assist in training, and operate within leadership structures.</p>
+            </div>
+          </div>
+          <div class="timeline-item active reveal-left" style="transition-delay:0.25s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-role">Technical Sergeant — Admin & IT Support</span>
+                <span class="timeline-period active">Jun 2026 — Present</span>
+              </div>
+              <p class="timeline-org">🇵🇭 Philippine Army Roleplay (PAR)</p>
+              <div class="timeline-details"><ul>
+                <li><strong>Technical Sergeant</strong> — current rank</li>
+                <li>Battalion Executive Officer — 1st Armored Division Battalion (1ADB)</li>
+                <li>IT Department — Army Artillery Regiment (AAR)</li>
+                <li>Former Personnel — 1st Infantry Division</li>
+              </ul></div>
+              <p class="timeline-note">My current service focuses on personnel support, administrative work, leadership, and assisting with AAR's internal systems and operations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ─── AWARDS ─── -->
+    <section id="awards">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">04</span>
+          <h2 class="section-title">Commendations & Awards</h2>
+          <p class="section-subtitle">Recognition and achievements earned throughout my service</p>
+        </div>
+        <div class="awards-featured reveal" style="transition-delay:0.1s">
+          <div class="award-icon-large">🏅</div>
+          <div class="award-featured-content">
+            <h4>Valedictorian — Marine Scout Sharpshooter</h4>
+            <p class="award-featured-meta">PMC · Featured</p>
+            <p>Top graduate recognition for academy performance, leadership, and dedication during service in the Philippine Marine Corps.</p>
+          </div>
+        </div>
+        <div class="awards-grid">
+          <div class="award-card reveal-scale" style="transition-delay:0.06s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Cadet Challenge Medal</h5><span class="award-meta">PMC</span></div></div><div class="award-desc">Awarded for academy participation and performance.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.10s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Marine MSS Medal</h5><span class="award-meta">PMC</span></div></div><div class="award-desc">Awarded for service in Marine Scout Sharpshooter.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.14s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Service</h5><span class="award-meta">PMC</span></div></div><div class="award-desc">Awarded for dedicated service and contribution.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.18s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Activeness</h5><span class="award-meta">PMC</span></div></div><div class="award-desc">Awarded for consistent activity and involvement.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.22s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Gawad sa Kapayapaan</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">Recognition awarded in Philippine Military Combat Roleplay.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.26s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Loyalty</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">Awarded for loyalty and continued service.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.30s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Bravery</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">Awarded for courage and commitment in service.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.34s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Honor</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">High recognition for exemplary conduct.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.38s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Service</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">Awarded for service and dedication.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.42s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Medal of Valor</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">Awarded for valor and outstanding contribution.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.46s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Veteran's Medal</h5><span class="award-meta">PMCR</span></div></div><div class="award-desc">Awarded in recognition of veteran service.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.50s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Armed Forces Conduct Medal</h5><span class="award-meta">PAR</span></div></div><div class="award-desc">Awarded for good conduct in Philippine Army Roleplay.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.54s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Military Commendation</h5><span class="award-meta">PAR</span></div></div><div class="award-desc">Awarded for commendable performance and service.</div></div>
+          <div class="award-card reveal-scale" style="transition-delay:0.58s"><div class="award-card-top"><div class="award-icon">🏅</div><div class="award-info"><h5>Military Civic Action Medal</h5><span class="award-meta">PAR</span></div></div><div class="award-desc">Awarded for civic action and community contribution.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── GALLERY ─── -->
+    <section id="gallery">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">05</span>
+          <h2 class="section-title">Gallery</h2>
+          <p class="section-subtitle">Certificates &amp; documentation of service</p>
+        </div>
+        <div class="gallery-carousel-wrap reveal" style="transition-delay:0.1s">
+          <div id="galleryCarousel" style="overflow:hidden">
+            <div class="gallery-track" id="galleryTrack">
+              <div class="gallery-item gallery-cert">
+                <div class="gallery-cert-inner"><div class="gallery-cert-icon">🎖️</div><h5>Artillery Academy — Certificate of Completion</h5><p>Certificate of completion confirming successful completion of required duties in accordance with the Artillery Academy Curriculum v2.</p><span class="gallery-cert-date">Awarded: June 23, 2026</span></div>
+              </div>
+              <div class="gallery-item gallery-cert">
+                <div class="gallery-cert-inner"><div class="gallery-cert-icon">🎖️</div><h5>1st Infantry Division — Certification</h5><p>Certification received following completion / graduation from the 1st Infantry Division.</p><span class="gallery-cert-date">Awarded: June 29, 2026</span></div>
+              </div>
+              <div class="gallery-item gallery-cert">
+                <div class="gallery-cert-inner"><div class="gallery-cert-icon">🎖️</div><h5>Tank Artillery Operator — Certificate of Completion</h5><p>Certificate recognizing successful completion of the Tank Artillery Operator course within the Army Artillery Regiment.</p><span class="gallery-cert-date">Awarded: July 20, 2026</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-nav">
+            <div class="carousel-dots" id="galleryDots" role="tablist" aria-label="Gallery pages"></div>
+            <div class="carousel-arrows">
+              <button class="carousel-btn" id="galPrev" aria-label="Previous gallery page">&#8592;</button>
+              <button class="carousel-btn" id="galNext" aria-label="Next gallery page">&#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CURRENT SERVICE ─── -->
+    <section id="current-service">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">06</span>
+          <h2 class="section-title">Current Service</h2>
+          <p class="section-subtitle">Where I am today</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item active reveal-left" style="transition-delay:0.1s">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-header">
+                <span class="timeline-role">PAR · 1ADB · AAR IT Department</span>
+                <span class="timeline-period active">Present</span>
+              </div>
+              <p class="timeline-org">My current involvement is primarily within PAR, particularly in 1ADB and the Army Artillery Regiment.</p>
+              <div class="timeline-details"><ul>
+                <li>Personnel and administrative tasks</li>
+                <li>Battalion operations</li>
+                <li>Documentation and records</li>
+                <li>Academy-related processes</li>
+                <li>Selections and deployments</li>
+                <li>Internal systems and databases</li>
+                <li>Website and bot-related support</li>
+                <li>General technical assistance</li>
+                <li>Staff coordination and community activities</li>
+              </ul></div>
+              <p class="timeline-note">While I am not a professional IT developer, I currently assist the IT Department with its systems and operations, particularly where administrative and technical support overlap.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TRAITS ─── -->
+    <section id="traits">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">07</span>
+          <h2 class="section-title">What I’m Like to Work With</h2>
+          <p class="section-subtitle">Work ethic and attitude</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card reveal-scale"><div class="skill-icon">⚡</div><h4>Active</h4><p>I try to stay involved rather than simply holding a position.</p></div>
+          <div class="skill-card reveal-scale"><div class="skill-icon">💪</div><h4>Hardworking</h4><p>If there is something that needs to be done, I’m willing to put in the time to get it done.</p></div>
+          <div class="skill-card reveal-scale"><div class="skill-icon">📚</div><h4>Willing to Learn</h4><p>I’m not afraid to ask questions or learn something new when I don’t know how to do something.</p></div>
+          <div class="skill-card reveal-scale"><div class="skill-icon">🤝</div><h4>Reliable</h4><p>When given a responsibility, I try my best to follow through and get it completed.</p></div>
+          <div class="skill-card reveal-scale"><div class="skill-icon">🔄</div><h4>Adaptable</h4><p>I’ve worked in different departments and leadership positions, which taught me how to adjust to different responsibilities.</p></div>
+          <div class="skill-card reveal-scale"><div class="skill-icon">💛</div><h4>Always Willing to Help</h4><p>Whether it’s administrative work, personnel concerns, documentation, or helping with a system, I’m usually willing to lend a hand.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CONTACT ─── -->
+    <section id="contact">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <span class="section-number">08</span>
+          <h2 class="section-title">Contact</h2>
+          <p class="section-subtitle">Let's Connect</p>
+        </div>
+        <div class="contact-centered">
+          <h3 class="reveal" style="transition-delay:0.08s">Let's Connect</h3>
+          <p class="reveal" style="transition-delay:0.15s">Interested in working together, discussing my service history, or simply reaching out?</p>
+          <div class="contact-cards">
+            <button class="contact-card contact-card--copy reveal" style="transition-delay:0.20s" data-copy="calixx_22">
+              <div class="contact-card-icon">🎮</div>
+              <div class="contact-card-body">
+                <div class="contact-card-label">Roblox — click to copy</div>
+                <div class="contact-card-value">calixx_22</div>
+              </div>
+              <span class="contact-card-arrow">⎘</span>
+            </button>
+            <div class="contact-card reveal" style="transition-delay:0.24s">
+              <div class="contact-card-icon">📍</div>
+              <div class="contact-card-body">
+                <div class="contact-card-label">Location</div>
+                <div class="contact-card-value">Philippines 🇵🇭</div>
+              </div>
+            </div>
+            <div class="contact-card reveal" style="transition-delay:0.28s">
+              <div class="contact-card-icon">🫡</div>
+              <div class="contact-card-body">
+                <div class="contact-card-label">Communities</div>
+                <div class="contact-card-value">PMC · PMCR · PAR</div>
+              </div>
+            </div>
+            <div class="contact-card reveal" style="transition-delay:0.32s">
+              <div class="contact-card-icon">⚙️</div>
+              <div class="contact-card-body">
+                <div class="contact-card-label">Current Service</div>
+                <div class="contact-card-value">PAR · 1ADB · AAR IT Department</div>
+              </div>
+            </div>
+          </div>
+          <p class="contact-note reveal" style="transition-delay:0.42s">Extended service records for other communities available upon request.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <span class="footer-brand">Calix</span>
+      <div class="footer-links">
+        <a href="#about">About</a><a href="#skills">Skills</a>
+        <a href="#experience">Service</a>
+        <a href="#awards">Awards</a><a href="#gallery">Gallery</a>
+        <a href="#current-service">Current</a><a href="#traits">Traits</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 calixx_22. All rights reserved. · CALIX PROPERTY</p>
+    </div>
+  </footer>
+
+  <!-- ─── BG MUSIC (YouTube autoplay: l5ta60yfryc) ─── -->
+  <div id="yt-music-wrap" aria-hidden="true"><div id="yt-player"></div></div>
+  <button id="sound-pill" aria-label="Tap to enable sound"><span class="dot"></span><span>🎵 Tap for music — Ikaw at Ako</span></button>
+
+  <script src="calix.js" defer></script>
+</body>
+</html>
