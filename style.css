@@ -1,26 +1,26 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ─── DESIGN TOKENS · Calix feminine formal ─── */
+    /* ─── DESIGN TOKENS · Calix Tactical Army Green ─── */
     :root {
-      --bg: #FBF7F2;
+      --bg: #F4F6F0;
       --bg-2: #FFFFFF;
-      --bg-3: #F5EBE3;
-      --text: #3A2E33;
-      --text-2: #6E5A61;
-      --text-3: #A08E94;
-      --accent: #7A3E4A;
-      --accent-2: #9D5C63;
-      --gold: #B08A4A;
-      --gold-2: #D4AFA0;
-      --gold-glow: rgba(157,92,99,0.16);
-      --green: #5BA87E;
-      --border: rgba(122,62,74,0.14);
-      --border-2: rgba(122,62,74,0.08);
-      --shadow-xs: 0 1px 4px rgba(122,62,74,0.06);
-      --shadow-sm: 0 2px 14px rgba(122,62,74,0.08);
-      --shadow-md: 0 10px 34px rgba(122,62,74,0.10);
-      --shadow-lg: 0 22px 60px rgba(122,62,74,0.14);
-      --shadow-xl: 0 40px 100px rgba(122,62,74,0.16);
+      --bg-3: #E6ECE0;
+      --text: #1B241A;
+      --text-2: #465444;
+      --text-3: #768574;
+      --accent: #384E24;
+      --accent-2: #4E6B33;
+      --gold: #9E7B2F;
+      --gold-2: #C5A456;
+      --gold-glow: rgba(78,107,51,0.18);
+      --green: #4C8C5E;
+      --border: rgba(56,78,36,0.16);
+      --border-2: rgba(56,78,36,0.09);
+      --shadow-xs: 0 1px 4px rgba(27,36,26,0.06);
+      --shadow-sm: 0 2px 14px rgba(27,36,26,0.08);
+      --shadow-md: 0 10px 34px rgba(27,36,26,0.10);
+      --shadow-lg: 0 22px 60px rgba(27,36,26,0.14);
+      --shadow-xl: 0 40px 100px rgba(27,36,26,0.16);
       --r-sm: 12px;
       --r-md: 18px;
       --r-lg: 28px;
@@ -35,23 +35,23 @@
     }
 
     [data-theme="dark"] {
-      --bg: #221A1E;
-      --bg-2: #2C2126;
-      --bg-3: #35272D;
-      --text: #F7ECEC;
-      --text-2: #C9B3B8;
-      --text-3: #8E767C;
-      --accent: #E0A3AD;
-      --accent-2: #C97E8A;
-      --gold: #D8B988;
-      --gold-2: #E8C9A0;
-      --gold-glow: rgba(224,163,173,0.14);
-      --border: rgba(247,236,236,0.12);
-      --border-2: rgba(247,236,236,0.07);
-      --shadow-xs: 0 1px 4px rgba(0,0,0,0.3);
-      --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
-      --shadow-md: 0 8px 32px rgba(0,0,0,0.5);
-      --shadow-lg: 0 20px 60px rgba(0,0,0,0.6);
+      --bg: #111610;
+      --bg-2: #182017;
+      --bg-3: #212B1F;
+      --text: #ECF1E8;
+      --text-2: #B3C1AF;
+      --text-3: #788875;
+      --accent: #84AD5C;
+      --accent-2: #6B9146;
+      --gold: #D6B568;
+      --gold-2: #E8CA82;
+      --gold-glow: rgba(132,173,92,0.16);
+      --border: rgba(236,241,232,0.12);
+      --border-2: rgba(236,241,232,0.07);
+      --shadow-xs: 0 1px 4px rgba(0,0,0,0.38);
+      --shadow-sm: 0 2px 12px rgba(0,0,0,0.48);
+      --shadow-md: 0 8px 32px rgba(0,0,0,0.58);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.68);
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
